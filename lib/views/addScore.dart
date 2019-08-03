@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/bowlbar.dart';
-import '../services/backend.dart' as backend;
+import '../services/firebase_service.dart' as backend;
 
 class AddScoreForm extends StatefulWidget {
   @override
@@ -11,11 +11,12 @@ class _AddScoreState extends State<AddScoreForm> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   final _addScoreFormKey = GlobalKey<FormState>();
-  final _controller = TextEditingController();
+  // final _controller = TextEditingController();
 
-  var _akuScore = 0;
-  var _mikkoScore = 0;
-  var _olliScore = 0;
+  var _akuScore;
+  var _mikkoScore;
+  var _olliScore;
+  var _serie;
 
   @override
   Widget build(BuildContext context) {
@@ -42,57 +43,87 @@ class _AddScoreState extends State<AddScoreForm> {
             ),
             TextFormField(
               decoration: InputDecoration(
-                labelText: "Aku",
+                labelText: "Serie",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25.0),
                   borderSide: BorderSide(),
                 ),
               ),
-              initialValue: '0',
+              initialValue: '1',
               keyboardType: TextInputType.number,
               //controller: _controller,
-              validator: (value) => _validateScore(value),
-              onSaved: (val) => _akuScore = int.parse(val),
+              onSaved: (val) {
+                setState(() {
+                  _serie = int.parse(val);
+                });
+              },
             ),
             Padding(
               padding: EdgeInsets.only(top: 30.0),
             ),
             TextFormField(
-              decoration: InputDecoration(
-                labelText: "Mikko",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25.0),
-                  borderSide: BorderSide(),
+                decoration: InputDecoration(
+                  labelText: "Aku",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                    borderSide: BorderSide(),
+                  ),
                 ),
-              ),
-              initialValue: '0',
-              keyboardType: TextInputType.number,
-              //controller: _controller,
-              validator: (value) => _validateScore(value),
-              onSaved: (val) => _mikkoScore = int.parse(val),
-            ),
+                initialValue: '0',
+                keyboardType: TextInputType.number,
+                //controller: _controller,
+                validator: (value) => _validateScore(value),
+                onSaved: (val) {
+                  setState(() {
+                    _akuScore = int.parse(val);
+                  });
+                }),
             Padding(
               padding: EdgeInsets.only(top: 30.0),
             ),
             TextFormField(
-              decoration: InputDecoration(
-                labelText: "Olli",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25.0),
-                  borderSide: BorderSide(),
+                decoration: InputDecoration(
+                  labelText: "Mikko",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                    borderSide: BorderSide(),
+                  ),
                 ),
-              ),
-              initialValue: '0',
-              keyboardType: TextInputType.number,
-              //controller: _controller,
-              validator: (value) => _validateScore(value),
-              onSaved: (val) => _olliScore = int.parse(val),
+                initialValue: '0',
+                keyboardType: TextInputType.number,
+                //controller: _controller,
+                validator: (value) => _validateScore(value),
+                onSaved: (val) {
+                  setState(() {
+                    _mikkoScore = int.parse(val);
+                  });
+                }),
+            Padding(
+              padding: EdgeInsets.only(top: 30.0),
             ),
+            TextFormField(
+                decoration: InputDecoration(
+                  labelText: "Olli",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                    borderSide: BorderSide(),
+                  ),
+                ),
+                initialValue: '0',
+                keyboardType: TextInputType.number,
+                //controller: _controller,
+                validator: (value) => _validateScore(value),
+                onSaved: (val) {
+                  setState(() {
+                    _olliScore = int.parse(val);
+                  });
+                }),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               child: RaisedButton(
                 onPressed: () {
                   if (_addScoreFormKey.currentState.validate()) {
+                    _addScoreFormKey.currentState.save();
                     _submitForm();
                   }
                 },
@@ -116,7 +147,9 @@ class _AddScoreState extends State<AddScoreForm> {
     return null;
   }
 
-  void _submitForm() {}
+  void _submitForm() {
+    backend.addScore(_akuScore, _mikkoScore, _olliScore, _serie);
+  }
 
   void showMessage(String message, [MaterialColor color = Colors.red]) {
     _scaffoldKey.currentState.showSnackBar(
@@ -125,7 +158,7 @@ class _AddScoreState extends State<AddScoreForm> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    //_controller.dispose();
     super.dispose();
   }
 }

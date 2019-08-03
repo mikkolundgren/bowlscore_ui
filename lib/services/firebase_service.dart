@@ -15,6 +15,17 @@ Stream<QuerySnapshot> getPayers() {
       .snapshots();
 }
 
+void addScore(akuScore, mikkoScore, olliScore, serie) {
+  // todo validate values
+  Firestore.instance.collection('scores').document().setData({
+    'akuScore': akuScore,
+    'mikkoScore': mikkoScore,
+    'olliScore': olliScore,
+    'serie': serie,
+    'date': DateTime.now()
+  });
+}
+
 class Payer {
   final Timestamp date;
   final String name;
@@ -29,13 +40,20 @@ class Payer {
 }
 
 class Serie {
-  String name;
-  int score;
-  int serieId;
-  Serie({this.name, this.score, this.serieId});
+  int akuScore;
+  int mikkoScore;
+  int olliScore;
+  int serie;
+  Timestamp date;
+  Serie(
+      {this.akuScore, this.mikkoScore, this.olliScore, this.serie, this.date});
   factory Serie.fromMap(Map<String, dynamic> map) {
     return Serie(
-        name: map['name'], score: map['score'], serieId: map['serieId']);
+        akuScore: map['akuScore'],
+        mikkoScore: map['mikkoScore'],
+        olliScore: map['olliScore'],
+        serie: map['serie'],
+        date: map['date']);
   }
 }
 

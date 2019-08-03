@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import './addPayers.dart';
 import '../widgets/bowlbar.dart';
 import './addScore.dart';
-import './listScores.dart';
+//import './listScores.dart';
+import './fb_list_scores.dart';
 import './listPayers.dart';
 
 class Dashboard extends StatefulWidget {
@@ -82,7 +83,7 @@ class _DashboardState extends State<Dashboard> {
         case "addScore":
           return AddScoreForm();
         case "scores":
-          return ListScores();
+          return FB_ListScores();
         default:
           return PayersPage();
       }
