@@ -4,6 +4,7 @@ import '../widgets/image_row.dart';
 import '../services/service_locator.dart';
 import '../model/app_model.dart';
 import 'package:intl/intl.dart';
+import '../services/firebase_service.dart' as backend;
 
 class PayersPage extends StatelessWidget {
   Widget build(BuildContext buildContext) {
@@ -21,6 +22,8 @@ class AddPayerForm extends StatefulWidget {
 }
 
 class _AddPayerState extends State<AddPayerForm> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   final _addPayerFormKey = GlobalKey<FormState>();
   String _currentBowler = 'Aku';
   String _currentDate = '';
@@ -44,6 +47,7 @@ class _AddPayerState extends State<AddPayerForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: BowlBar(title: "Add payer"),
       body: Container(
         padding: EdgeInsets.all(40.0),
@@ -54,6 +58,7 @@ class _AddPayerState extends State<AddPayerForm> {
 
   Widget _addPayerForm(context) {
     return Form(
+      key: _addPayerFormKey,
       child: Center(
           widthFactor: 33.0,
           child: Column(
@@ -62,16 +67,19 @@ class _AddPayerState extends State<AddPayerForm> {
                 padding: EdgeInsets.only(top: 30.0),
               ),
               TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Date",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    borderSide: BorderSide(),
+                  decoration: InputDecoration(
+                    labelText: "Date",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide(),
+                    ),
                   ),
-                ),
-                initialValue: DateFormat('dd.MM.yyyy').format(DateTime.now()),
-                onSaved: (val) => _currentDate = val,
-              ),
+                  initialValue: DateFormat('dd.MM.yyyy').format(DateTime.now()),
+                  onSaved: (val) {
+                    setState(() {
+                      _currentDate = val;
+                    });
+                  }),
               Padding(
                 padding: EdgeInsets.only(top: 30.0),
               ),
@@ -93,5 +101,14 @@ class _AddPayerState extends State<AddPayerForm> {
     );
   }
 
-  void _submitForm() {}
+  void _submitForm() {
+    _addPayerFormKey.currentState.save();
+    backend.addPayer(_currentBowler, _currentDate);
+    _showMessage("Saved payer $_currentBowler");
+  }
+
+  void _showMessage(String message, [MaterialColor color = Colors.green]) {
+    _scaffoldKey.currentState.showSnackBar(
+        new SnackBar(backgroundColor: color, content: new Text(message)));
+  }
 }

@@ -149,9 +149,16 @@ class _AddScoreState extends State<AddScoreForm> {
 
   void _submitForm() {
     backend.addScore(_akuScore, _mikkoScore, _olliScore, _serie);
+    showMessage("Success!");
+    setState(() {
+      _akuScore = 0;
+      _mikkoScore = 0;
+      _olliScore = 0;
+      _serie++;
+    });
   }
 
-  void showMessage(String message, [MaterialColor color = Colors.red]) {
+  void showMessage(String message, [MaterialColor color = Colors.green]) {
     _scaffoldKey.currentState.showSnackBar(
         new SnackBar(backgroundColor: color, content: new Text(message)));
   }

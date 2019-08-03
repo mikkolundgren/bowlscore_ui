@@ -26,6 +26,13 @@ void addScore(akuScore, mikkoScore, olliScore, serie) {
   });
 }
 
+void addPayer(name, date) {
+  Firestore.instance
+      .collection('payers')
+      .document()
+      .setData({'name': name, 'date': date});
+}
+
 class Payer {
   final Timestamp date;
   final String name;
