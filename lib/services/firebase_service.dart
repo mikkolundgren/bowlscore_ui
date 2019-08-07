@@ -33,6 +33,10 @@ void addPayer(name, date) {
       .setData({'name': name, 'date': date});
 }
 
+void deletePayer(String id) {
+  Firestore.instance.collection('payers').document(id).delete();
+}
+
 class Payer {
   final Timestamp date;
   final String name;

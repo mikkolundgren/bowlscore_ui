@@ -10,6 +10,22 @@ class ListPayers extends StatefulWidget {
 }
 
 class _ListPayersState extends State<ListPayers> {
+  Stream<QuerySnapshot> _payerStream;
+
+  @override
+  void initState() {
+    super.initState();
+    _payerStream = firebase.getPayers();
+  }
+
+  @override
+  void didUpdateWidget(ListPayers oldWidget) {
+    setState(() {
+      _payerStream = firebase.getPayers();
+    });
+    super.didUpdateWidget(oldWidget);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +46,7 @@ class _ListPayersState extends State<ListPayers> {
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: firebase.getPayers(),
+        stream: _payerStream,
         builder: (context, snapshot) {
           if (!snapshot.hasData) return LinearProgressIndicator();
           return _buildList(context, snapshot.data.documents);
@@ -38,9 +54,13 @@ class _ListPayersState extends State<ListPayers> {
   }
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
-    return ListView(
+    return ListView.builder(
       padding: const EdgeInsets.only(top: 20.0),
-      children: snapshot.map((data) => _buildListItem(context, data)).toList(),
+      itemCount: snapshot.length,
+      itemBuilder: (context, index) {
+        return _buildListItem(context, snapshot[index]);
+      },
+      //children: snapshot.map((data) => _buildListItem(context, data)).toList(),
     );
   }
 
@@ -58,8 +78,11 @@ class _ListPayersState extends State<ListPayers> {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: ListTile(
-          title: Text(millis),
-          trailing: Text(payer),
+          title: Text(millis + '  ' + payer),
+          trailing: Icon(Icons.delete),
+          onLongPress: () {
+            firebase.deletePayer(data.documentID);
+          },
         ),
       ),
     );
