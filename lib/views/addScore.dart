@@ -11,12 +11,24 @@ class _AddScoreState extends State<AddScoreForm> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   final _addScoreFormKey = GlobalKey<FormState>();
-  // final _controller = TextEditingController();
+  final _serieController = TextEditingController();
+  final _akuController = TextEditingController();
+  final _mikkoController = TextEditingController();
+  final _olliController = TextEditingController();
 
   var _akuScore;
   var _mikkoScore;
   var _olliScore;
   var _serie;
+
+  @override
+  void initState() {
+    super.initState();
+    _serieController.text = '1';
+    _akuController.text = '0';
+    _mikkoController.text = '0';
+    _olliController.text = '0';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +54,7 @@ class _AddScoreState extends State<AddScoreForm> {
               padding: EdgeInsets.only(top: 30.0),
             ),
             TextFormField(
+              //controller: _controller,
               decoration: InputDecoration(
                 labelText: "Serie",
                 border: OutlineInputBorder(
@@ -49,9 +62,9 @@ class _AddScoreState extends State<AddScoreForm> {
                   borderSide: BorderSide(),
                 ),
               ),
-              initialValue: '1',
+              //initialValue: '1',
               keyboardType: TextInputType.number,
-              //controller: _controller,
+              controller: _serieController,
               onSaved: (val) {
                 setState(() {
                   _serie = int.parse(val);
@@ -69,9 +82,9 @@ class _AddScoreState extends State<AddScoreForm> {
                     borderSide: BorderSide(),
                   ),
                 ),
-                initialValue: '0',
+                //initialValue: '0',
                 keyboardType: TextInputType.number,
-                //controller: _controller,
+                controller: _akuController,
                 validator: (value) => _validateScore(value),
                 onSaved: (val) {
                   setState(() {
@@ -89,9 +102,9 @@ class _AddScoreState extends State<AddScoreForm> {
                     borderSide: BorderSide(),
                   ),
                 ),
-                initialValue: '0',
+                //initialValue: '0',
                 keyboardType: TextInputType.number,
-                //controller: _controller,
+                controller: _mikkoController,
                 validator: (value) => _validateScore(value),
                 onSaved: (val) {
                   setState(() {
@@ -109,9 +122,9 @@ class _AddScoreState extends State<AddScoreForm> {
                     borderSide: BorderSide(),
                   ),
                 ),
-                initialValue: '0',
+                //initialValue: '0',
                 keyboardType: TextInputType.number,
-                //controller: _controller,
+                controller: _olliController,
                 validator: (value) => _validateScore(value),
                 onSaved: (val) {
                   setState(() {
@@ -150,11 +163,17 @@ class _AddScoreState extends State<AddScoreForm> {
   void _submitForm() {
     backend.addScore(_akuScore, _mikkoScore, _olliScore, _serie);
     showMessage("Success!");
+    _clearForm();
+  }
+
+  void _clearForm() {
     setState(() {
-      _akuScore = 0;
-      _mikkoScore = 0;
-      _olliScore = 0;
-      _serie++;
+      int nextSerie = int.parse(_serieController.text) + 1;
+      _serieController.text = nextSerie.toString();
+      _akuController.text = '0';
+      _mikkoController.text = '0';
+      _olliController.text = '0';
+    
     });
   }
 

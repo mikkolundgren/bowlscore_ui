@@ -37,11 +37,44 @@ class _FB_ListScoresState extends State<FB_ListScores> {
             return new ListView(
               children:
                   snapshot.data.documents.map((DocumentSnapshot document) {
-                return Text(document['akuScore'].toString());
+                return _scoreRow(document);
               }).toList(),
             );
         }
       },
+    );
+  }
+
+  Widget _scoreRow(DocumentSnapshot document) {
+    return Card(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                'Aku\t',
+                textAlign: TextAlign.left,
+              ),
+              Text(
+                document['akuScore'].toString(),
+                textAlign: TextAlign.right,
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Text('Mikko'),
+              Text(document['mikkoScore'].toString()),
+            ],
+          ),
+          Row(
+            children: [
+              Text('Olli'),
+              Text(document['olliScore'].toString()),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

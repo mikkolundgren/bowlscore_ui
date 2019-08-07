@@ -4,14 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 Stream<QuerySnapshot> getScores() {
   return Firestore.instance
       .collection('scores')
-      .orderBy('date', descending: false)
+      .orderBy('date', descending: true)
       .snapshots();
 }
 
 Stream<QuerySnapshot> getPayers() {
   return Firestore.instance
       .collection('payers')
-      .orderBy('date', descending: false)
+      .orderBy('date', descending: true)
       .snapshots();
 }
 

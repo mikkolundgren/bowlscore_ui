@@ -45,12 +45,12 @@ class _ListPayersState extends State<ListPayers> {
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final payer = firebase.Payer.fromSnapshot(data);
-    final millis = new DateTime.fromMillisecondsSinceEpoch(
-        payer.date.millisecondsSinceEpoch);
+    final payer = data['name']; //firebase.Payer.fromSnapshot(data);
+    final millis = data['date']; //new DateTime.fromMillisecondsSinceEpoch(
+    //payer.date.millisecondsSinceEpoch);
     final format = new DateFormat('dd.MM.yyyy');
     return Padding(
-      key: ValueKey(payer.date),
+      key: ValueKey(millis),
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Container(
         decoration: BoxDecoration(
@@ -58,8 +58,8 @@ class _ListPayersState extends State<ListPayers> {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: ListTile(
-          title: Text(format.format(millis)),
-          trailing: Text(payer.name),
+          title: Text(millis),
+          trailing: Text(payer),
         ),
       ),
     );
