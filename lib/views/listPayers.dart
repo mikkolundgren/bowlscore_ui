@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../widgets/bowlbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../services/firebase_service.dart' as firebase;
-import 'package:intl/intl.dart';
 
 class ListPayers extends StatefulWidget {
   @override
@@ -65,12 +64,8 @@ class _ListPayersState extends State<ListPayers> {
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final payer = data['name']; //firebase.Payer.fromSnapshot(data);
-    final millis = data['date']; //new DateTime.fromMillisecondsSinceEpoch(
-    //payer.date.millisecondsSinceEpoch);
-    final format = new DateFormat('dd.MM.yyyy');
     return Padding(
-      key: ValueKey(millis),
+      key: ValueKey(data['date']),
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Container(
         decoration: BoxDecoration(
@@ -78,7 +73,7 @@ class _ListPayersState extends State<ListPayers> {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: ListTile(
-          title: Text(millis + '  ' + payer),
+          title: Text(data['date'] + '  ' + data['name']),
           trailing: Icon(Icons.delete),
           onLongPress: () {
             firebase.deletePayer(data.documentID);

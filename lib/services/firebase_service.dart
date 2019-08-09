@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 Stream<QuerySnapshot> getScores() {
   return Firestore.instance
@@ -17,12 +17,17 @@ Stream<QuerySnapshot> getPayers() {
 
 void addScore(akuScore, mikkoScore, olliScore, serie) {
   // todo validate values
+
+  var now = DateTime.now();
+  var formatter = DateFormat('dd.MM.yyyy');
+
   Firestore.instance.collection('scores').document().setData({
     'akuScore': akuScore,
     'mikkoScore': mikkoScore,
     'olliScore': olliScore,
     'serie': serie,
-    'date': DateTime.now()
+    'date': formatter.format(now),
+    'timestamp': now
   });
 }
 
