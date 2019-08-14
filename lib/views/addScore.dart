@@ -43,107 +43,109 @@ class _AddScoreState extends State<AddScoreForm> {
   }
 
   Widget _addScoreForm() {
-    return Form(
-      key: _addScoreFormKey,
-      child: Center(
-        widthFactor: 33.0,
-        child: Column(
-          //crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 30.0),
-            ),
-            TextFormField(
-              //controller: _controller,
-              decoration: InputDecoration(
-                labelText: "Serie",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25.0),
-                  borderSide: BorderSide(),
-                ),
+    return Container(
+      child: Form(
+        key: _addScoreFormKey,
+        child: Center(
+          widthFactor: 33.0,
+          child: ListView(
+            //crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 30.0),
               ),
-              //initialValue: '1',
-              keyboardType: TextInputType.number,
-              controller: _serieController,
-              onSaved: (val) {
-                setState(() {
-                  _serie = int.parse(val);
-                });
-              },
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 30.0),
-            ),
-            TextFormField(
+              TextFormField(
+                //controller: _controller,
                 decoration: InputDecoration(
-                  labelText: "Aku",
+                  labelText: "Serie",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25.0),
                     borderSide: BorderSide(),
                   ),
                 ),
-                //initialValue: '0',
+                //initialValue: '1',
                 keyboardType: TextInputType.number,
-                controller: _akuController,
-                validator: (value) => _validateScore(value),
+                controller: _serieController,
                 onSaved: (val) {
                   setState(() {
-                    _akuScore = int.parse(val);
+                    _serie = int.parse(val);
                   });
-                }),
-            Padding(
-              padding: EdgeInsets.only(top: 30.0),
-            ),
-            TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Mikko",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    borderSide: BorderSide(),
-                  ),
-                ),
-                //initialValue: '0',
-                keyboardType: TextInputType.number,
-                controller: _mikkoController,
-                validator: (value) => _validateScore(value),
-                onSaved: (val) {
-                  setState(() {
-                    _mikkoScore = int.parse(val);
-                  });
-                }),
-            Padding(
-              padding: EdgeInsets.only(top: 30.0),
-            ),
-            TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Olli",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    borderSide: BorderSide(),
-                  ),
-                ),
-                //initialValue: '0',
-                keyboardType: TextInputType.number,
-                controller: _olliController,
-                validator: (value) => _validateScore(value),
-                onSaved: (val) {
-                  setState(() {
-                    _olliScore = int.parse(val);
-                  });
-                }),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: RaisedButton(
-                onPressed: () {
-                  if (_addScoreFormKey.currentState.validate()) {
-                    _addScoreFormKey.currentState.save();
-                    _submitForm();
-                  }
                 },
-                child: Text('Submit'),
               ),
-            )
-          ],
+              Padding(
+                padding: EdgeInsets.only(top: 30.0),
+              ),
+              TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "Aku",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide(),
+                    ),
+                  ),
+                  //initialValue: '0',
+                  keyboardType: TextInputType.number,
+                  controller: _akuController,
+                  validator: (value) => _validateScore(value),
+                  onSaved: (val) {
+                    setState(() {
+                      _akuScore = int.parse(val);
+                    });
+                  }),
+              Padding(
+                padding: EdgeInsets.only(top: 30.0),
+              ),
+              TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "Mikko",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide(),
+                    ),
+                  ),
+                  //initialValue: '0',
+                  keyboardType: TextInputType.number,
+                  controller: _mikkoController,
+                  validator: (value) => _validateScore(value),
+                  onSaved: (val) {
+                    setState(() {
+                      _mikkoScore = int.parse(val);
+                    });
+                  }),
+              Padding(
+                padding: EdgeInsets.only(top: 30.0),
+              ),
+              TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "Olli",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide(),
+                    ),
+                  ),
+                  //initialValue: '0',
+                  keyboardType: TextInputType.number,
+                  controller: _olliController,
+                  validator: (value) => _validateScore(value),
+                  onSaved: (val) {
+                    setState(() {
+                      _olliScore = int.parse(val);
+                    });
+                  }),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                child: RaisedButton(
+                  onPressed: () {
+                    if (_addScoreFormKey.currentState.validate()) {
+                      _addScoreFormKey.currentState.save();
+                      _submitForm();
+                    }
+                  },
+                  child: Text('Submit'),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -173,7 +175,6 @@ class _AddScoreState extends State<AddScoreForm> {
       _akuController.text = '0';
       _mikkoController.text = '0';
       _olliController.text = '0';
-    
     });
   }
 

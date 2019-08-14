@@ -19,6 +19,18 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		BA625F262302B17A000BFC57 /* libBoringSSL-GRPC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625F252302B17A000BFC57 /* libBoringSSL-GRPC.a */; };
+		BA625F282302B17A000BFC57 /* libcloud_firestore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625F272302B17A000BFC57 /* libcloud_firestore.a */; };
+		BA625F2A2302B17A000BFC57 /* libfirebase_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625F292302B17A000BFC57 /* libfirebase_core.a */; };
+		BA625F2C2302B17A000BFC57 /* libFirebaseCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625F2B2302B17A000BFC57 /* libFirebaseCore.a */; };
+		BA625F2E2302B17A000BFC57 /* libFirebaseFirestore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625F2D2302B17A000BFC57 /* libFirebaseFirestore.a */; };
+		BA625F302302B17A000BFC57 /* libFirebaseInstanceID.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625F2F2302B17A000BFC57 /* libFirebaseInstanceID.a */; };
+		BA625F322302B17A000BFC57 /* libGoogleUtilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625F312302B17A000BFC57 /* libGoogleUtilities.a */; };
+		BA625F342302B17A000BFC57 /* libgRPC-C++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625F332302B17A000BFC57 /* libgRPC-C++.a */; };
+		BA625F362302B17A000BFC57 /* libgRPC-Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625F352302B17A000BFC57 /* libgRPC-Core.a */; };
+		BA625F382302B17A000BFC57 /* libleveldb-library.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625F372302B17A000BFC57 /* libleveldb-library.a */; };
+		BA625F3A2302B17A000BFC57 /* libnanopb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625F392302B17A000BFC57 /* libnanopb.a */; };
+		BA625F3C2302B17A000BFC57 /* libProtobuf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625F3B2302B17A000BFC57 /* libProtobuf.a */; };
 		BAC6DF7522C2050300A0E080 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAC6DF7422C2050300A0E080 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +70,18 @@
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B71138ED8E45ADE9714C5963 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		B9E2499961073F61405C10AC /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
+		BA625F252302B17A000BFC57 /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA625F272302B17A000BFC57 /* libcloud_firestore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libcloud_firestore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA625F292302B17A000BFC57 /* libfirebase_core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libfirebase_core.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA625F2B2302B17A000BFC57 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA625F2D2302B17A000BFC57 /* libFirebaseFirestore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseFirestore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA625F2F2302B17A000BFC57 /* libFirebaseInstanceID.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstanceID.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA625F312302B17A000BFC57 /* libGoogleUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA625F332302B17A000BFC57 /* libgRPC-C++.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-C++.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA625F352302B17A000BFC57 /* libgRPC-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA625F372302B17A000BFC57 /* libleveldb-library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libleveldb-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA625F392302B17A000BFC57 /* libnanopb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libnanopb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA625F3B2302B17A000BFC57 /* libProtobuf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libProtobuf.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAC6DF7422C2050300A0E080 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +90,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA625F262302B17A000BFC57 /* libBoringSSL-GRPC.a in Frameworks */,
+				BA625F282302B17A000BFC57 /* libcloud_firestore.a in Frameworks */,
+				BA625F2A2302B17A000BFC57 /* libfirebase_core.a in Frameworks */,
+				BA625F2C2302B17A000BFC57 /* libFirebaseCore.a in Frameworks */,
+				BA625F2E2302B17A000BFC57 /* libFirebaseFirestore.a in Frameworks */,
+				BA625F302302B17A000BFC57 /* libFirebaseInstanceID.a in Frameworks */,
+				BA625F322302B17A000BFC57 /* libGoogleUtilities.a in Frameworks */,
+				BA625F342302B17A000BFC57 /* libgRPC-C++.a in Frameworks */,
+				BA625F362302B17A000BFC57 /* libgRPC-Core.a in Frameworks */,
+				BA625F382302B17A000BFC57 /* libleveldb-library.a in Frameworks */,
+				BA625F3A2302B17A000BFC57 /* libnanopb.a in Frameworks */,
+				BA625F3C2302B17A000BFC57 /* libProtobuf.a in Frameworks */,
 				9705A1C61CF904A100538489 /* Flutter.framework in Frameworks */,
 				3B80C3941E831B6300D905FE /* App.framework in Frameworks */,
 				40D1CC01051BC898BA7B305C /* libPods-Runner.a in Frameworks */,
@@ -78,6 +114,18 @@
 		5089527A854F3A4739CFDE47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BA625F252302B17A000BFC57 /* libBoringSSL-GRPC.a */,
+				BA625F272302B17A000BFC57 /* libcloud_firestore.a */,
+				BA625F292302B17A000BFC57 /* libfirebase_core.a */,
+				BA625F2B2302B17A000BFC57 /* libFirebaseCore.a */,
+				BA625F2D2302B17A000BFC57 /* libFirebaseFirestore.a */,
+				BA625F2F2302B17A000BFC57 /* libFirebaseInstanceID.a */,
+				BA625F312302B17A000BFC57 /* libGoogleUtilities.a */,
+				BA625F332302B17A000BFC57 /* libgRPC-C++.a */,
+				BA625F352302B17A000BFC57 /* libgRPC-Core.a */,
+				BA625F372302B17A000BFC57 /* libleveldb-library.a */,
+				BA625F392302B17A000BFC57 /* libnanopb.a */,
+				BA625F3B2302B17A000BFC57 /* libProtobuf.a */,
 				819564F0D5E10AD7BAC1CF5E /* libPods-Runner.a */,
 			);
 			name = Frameworks;
@@ -235,7 +283,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh",
-				"${PODS_ROOT}/../.symlinks/flutter/ios/Flutter.framework",
+				"${PODS_ROOT}/../.symlinks/flutter/ios-release/Flutter.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -546,6 +594,7 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = T498X87259;
 				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
@@ -556,6 +605,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.bowlscore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -580,6 +630,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.bowlscore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
