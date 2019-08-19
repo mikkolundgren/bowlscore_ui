@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import './views/dashboard.dart';
 import './services/service_locator.dart';
+import './services/firebase_service.dart';
 
 void main() {
   setupLocator();
+  signIn();
   runApp(new MyApp());
 }
 

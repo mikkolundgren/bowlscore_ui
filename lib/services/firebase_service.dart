@@ -1,5 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../secret/creds.dart' as creds;
+
+void signIn() {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  _auth
+      .signInWithEmailAndPassword(email: creds.email, password: creds.password)
+      .then((result) {
+    if (result.user != null) {
+      print('logged in $result.user');
+    }
+  });
+}
 
 Stream<QuerySnapshot> getScores() {
   return Firestore.instance
