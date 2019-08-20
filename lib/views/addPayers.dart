@@ -103,12 +103,18 @@ class _AddPayerState extends State<AddPayerForm> {
 
   void _submitForm() {
     _addPayerFormKey.currentState.save();
-    backend.addPayer(_currentBowler, _currentDate);
-    _showMessage("Saved payer $_currentBowler");
+    try {
+      backend.addPayer(_currentBowler, _currentDate);
+      _showMessage("Saved payer $_currentBowler");
+    } catch (err) {
+      _showMessage("Error.. $err", Colors.red);
+    }
   }
 
   void _showMessage(String message, [MaterialColor color = Colors.green]) {
-    _scaffoldKey.currentState.showSnackBar(
-        new SnackBar(backgroundColor: color, content: new Text(message)));
+    _scaffoldKey.currentState.showSnackBar(new SnackBar(
+      backgroundColor: color,
+      content: Text(message),
+    ));
   }
 }

@@ -14,6 +14,20 @@ void signIn() {
   });
 }
 
+List<DocumentSnapshot> getScoresForLeague() {
+  Firestore.instance
+      .collection('scores')
+      .orderBy('date', descending: true)
+      .getDocuments()
+      .then((result) {
+    print("fetched $result.length documents for league.");
+    return result.documents;
+  }).catchError((error) {
+    print("error fetching documents for league $error");
+  });
+  return new List<DocumentSnapshot>();
+}
+
 Stream<QuerySnapshot> getScores() {
   return Firestore.instance
       .collection('scores')
@@ -48,7 +62,9 @@ void addPayer(name, date) {
   Firestore.instance
       .collection('payers')
       .document()
-      .setData({'name': name, 'date': date});
+      .setData({'name': name, 'date': date}).catchError((err) {
+    throw err;
+  });
 }
 
 void deletePayer(String id) {
