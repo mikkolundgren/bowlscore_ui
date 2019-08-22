@@ -3,36 +3,82 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'firebase_service.dart';
 
 class League {
-  int aku;
-  int mikko;
-  int olli;
-  League({this.aku, this.mikko, this.olli});
+  int akuSeries = 0;
+  int mikkoSeries = 0;
+  int olliSeries = 0;
+
+  int akuTotal = 0;
+  int mikkoTotal = 0;
+  int olliTotal = 0;
+
+  int akuBestOfDay = 0;
+  int mikkoBestOfDay = 0;
+  int olliBestOfDay = 0;
 }
 
-League calculate() {
-  int _akuPts = 0;
-  int _mikkoPts = 0;
-  int _olliPts = 0;
+class Scores {
+  final int aku;
+  final int mikko;
+  final int olli;
+  Scores({this.aku, this.mikko, this.olli});
+}
+
+League calculate([bool fullteam = true]) {
+  League league = new League();
 
   List<DocumentSnapshot> docs = getScoresForLeague();
 
+  String currentDate = docs[0].data['date'];
+  List<Scores> dayScores = [];
+
   for (DocumentSnapshot d in docs) {
-    serieBest(_akuPts, _mikkoPts, _olliPts, d);
+    Scores s = _parseScores(d);
+    if (fullteam) {
+      if ((s.aku > 0 && s.mikko > 0 && s.olli > 0) == false) {
+        continue;
+      }
+    }
+    _serieBest(league, s);
+    if (currentDate == d['date']) {
+      dayScores.add(s);
+    } else {
+      _dayPoints(league, dayScores);
+      dayScores.clear();
+      currentDate = d['date'];
+      dayScores.add(s);
+    }
   }
-  return new League(aku: _akuPts, mikko: _mikkoPts, olli: _olliPts);
+  return league;
 }
 
-void serieBest(int aku, int mikko, int olli, DocumentSnapshot d) {
-  final int akuScore = int.parse(d.data['akuScore']);
-  final int mikkoScore = int.parse(d.data['mikkoScore']);
-  final int olliScore = int.parse(d.data['olliScore']);
-  if (akuScore >= mikkoScore && akuScore >= olliScore) {
-    aku++;
+Scores _parseScores(DocumentSnapshot d) {
+  return Scores(
+      aku: int.parse(d['akuScore']),
+      mikko: int.parse(d['mikkoScore']),
+      olli: int.parse(d['olliScore']));
+}
+
+void _serieBest(League league, Scores s) {
+  if (s.aku >= s.mikko && s.aku >= s.olli) {
+    league.akuSeries++;
   }
-  if (mikkoScore >= akuScore && mikkoScore >= olliScore) {
-    mikko++;
+  if (s.mikko >= s.aku && s.mikko >= s.olli) {
+    league.mikkoSeries++;
   }
-  if (olliScore >= akuScore && olliScore >= mikkoScore) {
-    olli++;
+  if (s.olli >= s.aku && s.olli >= s.mikko) {
+    league.olliSeries++;
   }
+}
+
+void _dayPoints(League l, List<Scores> dayScores) {
+  int akuTotal, olliTotal, mikkoTotal = 0;
+
+  for (Scores s in dayScores) {
+    akuTotal += s.aku;
+    mikkoTotal += s.mikko;
+    olliTotal += s.olli;
+  }
+  if (akuTotal >= mikkoTotal && akuTotal >= olliTotal) l.akuTotal++;
+  if (mikkoTotal >= akuTotal && mikkoTotal >= olliTotal) l.mikkoTotal++;
+  if (olliTotal >= akuTotal && olliTotal >= mikkoTotal) l.olliTotal++;
 }
