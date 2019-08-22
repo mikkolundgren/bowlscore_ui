@@ -23,7 +23,7 @@ class Scores {
   Scores({this.aku, this.mikko, this.olli});
 }
 
-League calculate([bool fullteam = true]) {
+League calculateLeague([bool fullteam = true]) {
   League league = new League();
 
   List<DocumentSnapshot> docs = getScoresForLeague();

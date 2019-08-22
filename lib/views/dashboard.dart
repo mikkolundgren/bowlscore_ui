@@ -5,6 +5,7 @@ import './addScore.dart';
 //import './listScores.dart';
 import './fb_list_scores.dart';
 import './listPayers.dart';
+import './league_page.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -74,19 +75,26 @@ class _DashboardState extends State<Dashboard> {
   }
 
   _showPage(String action) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      switch (action) {
-        case "showPayers":
-          return ListPayers();
-        case "addPayer":
-          return AddPayerForm();
-        case "addScore":
-          return AddScoreForm();
-        case "scores":
-          return FB_ListScores();
-        default:
-          return PayersPage();
-      }
-    }));
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          switch (action) {
+            case "showPayers":
+              return ListPayers();
+            case "addPayer":
+              return AddPayerForm();
+            case "addScore":
+              return AddScoreForm();
+            case "scores":
+              return FB_ListScores();
+            case "league":
+              return LeaguePage();
+            default:
+              return PayersPage();
+          }
+        },
+      ),
+    );
   }
 }
