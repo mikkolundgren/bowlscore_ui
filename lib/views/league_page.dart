@@ -32,12 +32,14 @@ class _LeaguePageState extends State<LeaguePage> {
     return Table(
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: <TableRow>[
-        TableRow(children: <Widget>[
-          Text("Aku"),
-          Text(_league.akuSeries.toString()),
-          Text(_league.akuTotal.toString()),
-          Text((_league.akuSeries + _league.akuTotal).toString())
-        ]),
+        TableRow(
+          children: <Widget>[
+            Text("Aku"),
+            Text(_league.akuSeries.toString()),
+            Text(_league.akuTotal.toString()),
+            Text((_league.akuSeries + _league.akuTotal).toString())
+          ],
+        ),
         TableRow(
           children: <Widget>[
             Text("Mikko"),

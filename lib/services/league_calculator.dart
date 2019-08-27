@@ -28,7 +28,6 @@ League calculateLeague([bool fullteam = true]) {
 
   List<DocumentSnapshot> docs = getScoresForLeague();
 
-  String currentDate = docs[0].data['date'];
   List<Scores> dayScores = [];
 
   for (DocumentSnapshot d in docs) {
@@ -39,6 +38,7 @@ League calculateLeague([bool fullteam = true]) {
       }
     }
     _serieBest(league, s);
+    String currentDate = docs[0].data['date'];
     if (currentDate == d['date']) {
       dayScores.add(s);
     } else {
@@ -72,13 +72,19 @@ void _serieBest(League league, Scores s) {
 
 void _dayPoints(League l, List<Scores> dayScores) {
   int akuTotal, olliTotal, mikkoTotal = 0;
-
+  int akuBest, mikkoBest, olliBest = 0;
   for (Scores s in dayScores) {
     akuTotal += s.aku;
     mikkoTotal += s.mikko;
     olliTotal += s.olli;
+    if (s.aku >= akuBest) akuBest = s.aku;
+    if (s.mikko >= mikkoBest) mikkoBest = s.mikko;
+    if (s.olli >= olliBest) olliBest = s.olli;
   }
   if (akuTotal >= mikkoTotal && akuTotal >= olliTotal) l.akuTotal++;
   if (mikkoTotal >= akuTotal && mikkoTotal >= olliTotal) l.mikkoTotal++;
   if (olliTotal >= akuTotal && olliTotal >= mikkoTotal) l.olliTotal++;
+  if (akuBest >= mikkoBest && akuBest >= olliBest) l.akuBestOfDay++;
+  if (mikkoBest >= akuBest && mikkoBest >= olliBest) l.mikkoBestOfDay++;
+  if (olliBest >= akuBest && olliBest >= mikkoBest) l.olliBestOfDay++;
 }
