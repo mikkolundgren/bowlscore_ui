@@ -10,12 +10,9 @@ class LeaguePage extends StatefulWidget {
 }
 
 class _LeaguePageState extends State<LeaguePage> {
-  League _league;
-
   @override
   void initState() {
     super.initState();
-    _league = calculateLeague();
   }
 
   @override
@@ -23,21 +20,47 @@ class _LeaguePageState extends State<LeaguePage> {
     return Scaffold(
       appBar: BowlBar(title: "League"),
       body: Container(
-        child: _leagueGrid(),
+        child: _leagueFuture(),
       ),
     );
   }
 
-  Widget _leagueGrid() {
+  FutureBuilder<League> _leagueFuture() {
+    return FutureBuilder<League>(
+        future: calculateLeague(),
+        builder: (BuildContext context, AsyncSnapshot<League> snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.active:
+            case ConnectionState.waiting:
+              return CircularProgressIndicator();
+            case ConnectionState.done:
+              return _leagueGrid(snapshot.data);
+          }
+          return null;
+        });
+  }
+
+  Widget _leagueGrid(League _league) {
     return Table(
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: <TableRow>[
         TableRow(
           children: <Widget>[
+            Text("Name"),
+            Text("Series"),
+            Text("Totals"),
+            Text("DaysBest"),
+            Text("POINTS"),
+          ],
+        ),
+        TableRow(
+          children: <Widget>[
             Text("Aku"),
             Text(_league.akuSeries.toString()),
             Text(_league.akuTotal.toString()),
-            Text((_league.akuSeries + _league.akuTotal).toString())
+            Text(_league.akuBestOfDay.toString()),
+            Text(_league.akuPoints.toString()),
           ],
         ),
         TableRow(
@@ -45,7 +68,8 @@ class _LeaguePageState extends State<LeaguePage> {
             Text("Mikko"),
             Text(_league.mikkoSeries.toString()),
             Text(_league.mikkoTotal.toString()),
-            Text((_league.mikkoSeries + _league.mikkoTotal).toString())
+            Text(_league.mikkoBestOfDay.toString()),
+            Text(_league.mikkoPoints.toString()),
           ],
         ),
         TableRow(
@@ -53,7 +77,8 @@ class _LeaguePageState extends State<LeaguePage> {
             Text("Olli"),
             Text(_league.olliSeries.toString()),
             Text(_league.olliTotal.toString()),
-            Text((_league.olliSeries + _league.olliTotal).toString())
+            Text(_league.olliBestOfDay.toString()),
+            Text(_league.olliPoints.toString()),
           ],
         ),
       ],

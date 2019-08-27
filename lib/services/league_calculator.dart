@@ -14,6 +14,18 @@ class League {
   int akuBestOfDay = 0;
   int mikkoBestOfDay = 0;
   int olliBestOfDay = 0;
+
+  int get akuPoints {
+    return akuSeries + akuTotal + akuBestOfDay;
+  }
+
+  int get mikkoPoints {
+    return mikkoSeries + mikkoTotal + mikkoBestOfDay;
+  }
+
+  int get olliPoints {
+    return olliSeries + olliTotal + olliBestOfDay;
+  }
 }
 
 class Scores {
@@ -23,13 +35,14 @@ class Scores {
   Scores({this.aku, this.mikko, this.olli});
 }
 
-League calculateLeague([bool fullteam = true]) {
+Future<League> calculateLeague([bool fullteam = true]) async {
+  QuerySnapshot result = await getScoresFuture();
+
   League league = new League();
 
-  List<DocumentSnapshot> docs = getScoresForLeague();
-
   List<Scores> dayScores = [];
-
+  List<DocumentSnapshot> docs = result.documents;
+  String currentDate = docs[0].data['date'];
   for (DocumentSnapshot d in docs) {
     Scores s = _parseScores(d);
     if (fullteam) {
@@ -38,7 +51,7 @@ League calculateLeague([bool fullteam = true]) {
       }
     }
     _serieBest(league, s);
-    String currentDate = docs[0].data['date'];
+
     if (currentDate == d['date']) {
       dayScores.add(s);
     } else {
@@ -48,14 +61,13 @@ League calculateLeague([bool fullteam = true]) {
       dayScores.add(s);
     }
   }
+  _dayPoints(league, dayScores);
   return league;
 }
 
 Scores _parseScores(DocumentSnapshot d) {
   return Scores(
-      aku: int.parse(d['akuScore']),
-      mikko: int.parse(d['mikkoScore']),
-      olli: int.parse(d['olliScore']));
+      aku: d['akuScore'], mikko: d['mikkoScore'], olli: d['olliScore']);
 }
 
 void _serieBest(League league, Scores s) {
@@ -71,8 +83,12 @@ void _serieBest(League league, Scores s) {
 }
 
 void _dayPoints(League l, List<Scores> dayScores) {
-  int akuTotal, olliTotal, mikkoTotal = 0;
-  int akuBest, mikkoBest, olliBest = 0;
+  int akuTotal = 0;
+  int olliTotal = 0;
+  int mikkoTotal = 0;
+  int akuBest = 0;
+  int mikkoBest = 0;
+  int olliBest = 0;
   for (Scores s in dayScores) {
     akuTotal += s.aku;
     mikkoTotal += s.mikko;

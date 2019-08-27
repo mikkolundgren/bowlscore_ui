@@ -14,13 +14,20 @@ void signIn() {
   });
 }
 
+Future<QuerySnapshot> getScoresFuture() {
+  return Firestore.instance
+      .collection('scores')
+      .orderBy('date', descending: true)
+      .getDocuments();
+}
+
 List<DocumentSnapshot> getScoresForLeague() {
   Firestore.instance
       .collection('scores')
       .orderBy('date', descending: true)
       .getDocuments()
       .then((result) {
-    print("fetched $result.length documents for league.");
+    print("fetched $result.documents.length documents for league.");
     return result.documents;
   }).catchError((error) {
     print("error fetching documents for league $error");
