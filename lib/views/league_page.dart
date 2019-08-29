@@ -20,7 +20,12 @@ class _LeaguePageState extends State<LeaguePage> {
     return Scaffold(
       appBar: BowlBar(title: "League"),
       body: Container(
-        child: _leagueFuture(),
+        child: Column(
+          children: <Widget>[
+            Text("Hall of Shame"),
+            _leagueFuture(),
+          ],
+        ),
       ),
     );
   }
@@ -33,7 +38,7 @@ class _LeaguePageState extends State<LeaguePage> {
             case ConnectionState.none:
             case ConnectionState.active:
             case ConnectionState.waiting:
-              return CircularProgressIndicator();
+              return _progress();
             case ConnectionState.done:
               return _leagueGrid(snapshot.data);
           }
@@ -41,47 +46,57 @@ class _LeaguePageState extends State<LeaguePage> {
         });
   }
 
+  Widget _progress() {
+    return Container(
+      alignment: Alignment.center,
+      child: CircularProgressIndicator(),
+    );
+  }
+
   Widget _leagueGrid(League _league) {
-    return Table(
-      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-      children: <TableRow>[
-        TableRow(
-          children: <Widget>[
-            Text("Name"),
-            Text("Series"),
-            Text("Totals"),
-            Text("DaysBest"),
-            Text("POINTS"),
-          ],
-        ),
-        TableRow(
-          children: <Widget>[
-            Text("Aku"),
-            Text(_league.akuSeries.toString()),
-            Text(_league.akuTotal.toString()),
-            Text(_league.akuBestOfDay.toString()),
-            Text(_league.akuPoints.toString()),
-          ],
-        ),
-        TableRow(
-          children: <Widget>[
-            Text("Mikko"),
-            Text(_league.mikkoSeries.toString()),
-            Text(_league.mikkoTotal.toString()),
-            Text(_league.mikkoBestOfDay.toString()),
-            Text(_league.mikkoPoints.toString()),
-          ],
-        ),
-        TableRow(
-          children: <Widget>[
-            Text("Olli"),
-            Text(_league.olliSeries.toString()),
-            Text(_league.olliTotal.toString()),
-            Text(_league.olliBestOfDay.toString()),
-            Text(_league.olliPoints.toString()),
-          ],
-        ),
-      ],
+    return Container(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: Table(
+        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+        children: <TableRow>[
+          TableRow(
+            children: <Widget>[
+              Text("Name"),
+              Text("Series"),
+              Text("Totals"),
+              Text("DaysBest"),
+              Text("POINTS"),
+            ],
+          ),
+          TableRow(
+            children: <Widget>[
+              Text("Aku"),
+              Text(_league.akuSeries.toString()),
+              Text(_league.akuTotal.toString()),
+              Text(_league.akuBestOfDay.toString()),
+              Text(_league.akuPoints.toString()),
+            ],
+          ),
+          TableRow(
+            children: <Widget>[
+              Text("Mikko"),
+              Text(_league.mikkoSeries.toString()),
+              Text(_league.mikkoTotal.toString()),
+              Text(_league.mikkoBestOfDay.toString()),
+              Text(_league.mikkoPoints.toString()),
+            ],
+          ),
+          TableRow(
+            children: <Widget>[
+              Text("Olli"),
+              Text(_league.olliSeries.toString()),
+              Text(_league.olliTotal.toString()),
+              Text(_league.olliBestOfDay.toString()),
+              Text(_league.olliPoints.toString()),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

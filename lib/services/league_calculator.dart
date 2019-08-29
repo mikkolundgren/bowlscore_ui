@@ -35,8 +35,10 @@ class Scores {
   Scores({this.aku, this.mikko, this.olli});
 }
 
-Future<League> calculateLeague([bool fullteam = true]) async {
-  QuerySnapshot result = await getScoresFuture();
+Future<League> calculateLeague(
+    [bool fullteam = true, DateTime startDate]) async {
+  
+  QuerySnapshot result = await getScoresFuture(startDate);
 
   League league = new League();
 

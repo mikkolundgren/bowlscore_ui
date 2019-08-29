@@ -14,11 +14,19 @@ void signIn() {
   });
 }
 
-Future<QuerySnapshot> getScoresFuture() {
-  return Firestore.instance
-      .collection('scores')
-      .orderBy('date', descending: true)
-      .getDocuments();
+Future<QuerySnapshot> getScoresFuture(startDate) {
+  if (startDate == null) {
+    return Firestore.instance
+        .collection('scores')
+        .orderBy('timestamp', descending: true)
+        .getDocuments();
+  } else {
+    return Firestore.instance
+        .collection('scores')
+        .where('timestamp', isGreaterThanOrEqualTo: startDate)
+        .orderBy('timestamp', descending: true)
+        .getDocuments();
+  }
 }
 
 List<DocumentSnapshot> getScoresForLeague() {
