@@ -32,7 +32,7 @@ Future<QuerySnapshot> getScoresFuture(startDate) {
 List<DocumentSnapshot> getScoresForLeague() {
   Firestore.instance
       .collection('scores')
-      .orderBy('date', descending: true)
+      .orderBy('timestamp', descending: true)
       .getDocuments()
       .then((result) {
     print("fetched $result.documents.length documents for league.");
@@ -46,14 +46,14 @@ List<DocumentSnapshot> getScoresForLeague() {
 Stream<QuerySnapshot> getScores() {
   return Firestore.instance
       .collection('scores')
-      .orderBy('date', descending: true)
+      .orderBy('timetamp', descending: true)
       .snapshots();
 }
 
 Stream<QuerySnapshot> getPayers() {
   return Firestore.instance
       .collection('payers')
-      .orderBy('date', descending: true)
+      .orderBy('timestamp', descending: true)
       .snapshots();
 }
 

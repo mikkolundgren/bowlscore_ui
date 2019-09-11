@@ -66,6 +66,10 @@ class _AddScoreState extends State<AddScoreForm> {
                 //initialValue: '1',
                 keyboardType: TextInputType.number,
                 controller: _serieController,
+                validator: (value) => _validateScore(value),
+                onTap: () {
+                  _serieController.text = '';
+                },
                 onSaved: (val) {
                   setState(() {
                     _serie = int.parse(val);
@@ -87,6 +91,9 @@ class _AddScoreState extends State<AddScoreForm> {
                   keyboardType: TextInputType.number,
                   controller: _akuController,
                   validator: (value) => _validateScore(value),
+                  onTap: () {
+                    _akuController.text = '';
+                  },
                   onSaved: (val) {
                     setState(() {
                       _akuScore = int.parse(val);
@@ -107,6 +114,9 @@ class _AddScoreState extends State<AddScoreForm> {
                   keyboardType: TextInputType.number,
                   controller: _mikkoController,
                   validator: (value) => _validateScore(value),
+                  onTap: () {
+                    _mikkoController.text = '';
+                  },
                   onSaved: (val) {
                     setState(() {
                       _mikkoScore = int.parse(val);
@@ -127,6 +137,9 @@ class _AddScoreState extends State<AddScoreForm> {
                   keyboardType: TextInputType.number,
                   controller: _olliController,
                   validator: (value) => _validateScore(value),
+                  onTap: () {
+                    _olliController.text = '';
+                  },
                   onSaved: (val) {
                     setState(() {
                       _olliScore = int.parse(val);
