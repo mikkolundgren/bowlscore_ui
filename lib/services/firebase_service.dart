@@ -46,7 +46,7 @@ List<DocumentSnapshot> getScoresForLeague() {
 Stream<QuerySnapshot> getScores() {
   return Firestore.instance
       .collection('scores')
-      .orderBy('timetamp', descending: true)
+      .orderBy('timestamp', descending: true)
       .snapshots();
 }
 
@@ -74,10 +74,9 @@ void addScore(akuScore, mikkoScore, olliScore, serie) {
 }
 
 void addPayer(name, date) {
-  Firestore.instance
-      .collection('payers')
-      .document()
-      .setData({'name': name, 'date': date}).catchError((err) {
+  var now = DateTime.now();
+  Firestore.instance.collection('payers').document().setData(
+      {'name': name, 'date': date, 'timestamp': now}).catchError((err) {
     throw err;
   });
 }

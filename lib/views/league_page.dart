@@ -48,8 +48,26 @@ class _LeaguePageState extends State<LeaguePage> {
 
   Widget _progress() {
     return Container(
-      alignment: Alignment.center,
-      child: CircularProgressIndicator(),
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+
+  Widget _headingText(String text) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 15.0,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  Widget _text(String text) {
+    return Text(
+      text,
+      style: TextStyle(fontSize: 20.0),
     );
   }
 
@@ -60,39 +78,42 @@ class _LeaguePageState extends State<LeaguePage> {
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
         children: <TableRow>[
           TableRow(
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(245, 243, 237, 1),
+            ),
             children: <Widget>[
-              Text("Name"),
-              Text("Series"),
-              Text("Totals"),
-              Text("DaysBest"),
-              Text("POINTS"),
+              _headingText("Name"),
+              _headingText("Series"),
+              _headingText("Totals"),
+              _headingText("DaysBest"),
+              _headingText("POINTS"),
             ],
           ),
           TableRow(
             children: <Widget>[
-              Text("Aku"),
-              Text(_league.akuSeries.toString()),
-              Text(_league.akuTotal.toString()),
-              Text(_league.akuBestOfDay.toString()),
-              Text(_league.akuPoints.toString()),
+              _text("Aku"),
+              _text(_league.akuSeries.toString()),
+              _text(_league.akuTotal.toString()),
+              _text(_league.akuBestOfDay.toString()),
+              _text(_league.akuPoints.toString()),
             ],
           ),
           TableRow(
             children: <Widget>[
-              Text("Mikko"),
-              Text(_league.mikkoSeries.toString()),
-              Text(_league.mikkoTotal.toString()),
-              Text(_league.mikkoBestOfDay.toString()),
-              Text(_league.mikkoPoints.toString()),
+              _text("Mikko"),
+              _text(_league.mikkoSeries.toString()),
+              _text(_league.mikkoTotal.toString()),
+              _text(_league.mikkoBestOfDay.toString()),
+              _text(_league.mikkoPoints.toString()),
             ],
           ),
           TableRow(
             children: <Widget>[
-              Text("Olli"),
-              Text(_league.olliSeries.toString()),
-              Text(_league.olliTotal.toString()),
-              Text(_league.olliBestOfDay.toString()),
-              Text(_league.olliPoints.toString()),
+              _text("Olli"),
+              _text(_league.olliSeries.toString()),
+              _text(_league.olliTotal.toString()),
+              _text(_league.olliBestOfDay.toString()),
+              _text(_league.olliPoints.toString()),
             ],
           ),
         ],
