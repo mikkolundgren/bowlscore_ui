@@ -14,7 +14,7 @@ void signIn() {
   });
 }
 
-Future<QuerySnapshot> getScoresFuture(startDate) {
+Future<QuerySnapshot> getScoresFuture({startDate}) {
   if (startDate == null) {
     return Firestore.instance
         .collection('scores')

@@ -2,6 +2,7 @@ import '../services/league_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import '../widgets/bowlbar.dart';
+import '../domain/league.dart';
 
 class LeaguePage extends StatefulWidget {
   LeaguePage({Key key}) : super(key: key);
