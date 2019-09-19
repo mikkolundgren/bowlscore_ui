@@ -29,11 +29,12 @@ Future<QuerySnapshot> getScoresFuture({startDate}) {
   }
 }
 
-List<DocumentSnapshot> getScoresForLeague() {
-  Firestore.instance
+Future<QuerySnapshot> getScoresForLeague() {
+  return Firestore.instance
       .collection('scores')
       .orderBy('timestamp', descending: true)
-      .getDocuments()
+      .getDocuments();
+  /*
       .then((result) {
     print("fetched $result.documents.length documents for league.");
     return result.documents;
@@ -41,6 +42,7 @@ List<DocumentSnapshot> getScoresForLeague() {
     print("error fetching documents for league $error");
   });
   return new List<DocumentSnapshot>();
+  */
 }
 
 Stream<QuerySnapshot> getScores() {

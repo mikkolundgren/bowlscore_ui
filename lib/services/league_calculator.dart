@@ -6,20 +6,27 @@ import '../domain/league.dart';
 
 Future<League> calculateLeague(
     [bool fullteam = true, DateTime startDate]) async {
-  QuerySnapshot result = await getScoresFuture(startDate: startDate);
+  QuerySnapshot result = await getScoresForLeague();
 
   League league = new League();
 
   List<Scores> dayScores = [];
   List<DocumentSnapshot> docs = result.documents;
-  String currentDate = docs[0].data['date'];
+
+  List<DocumentSnapshot> filtered = List<DocumentSnapshot>();
   for (DocumentSnapshot d in docs) {
     Scores s = _parseScores(d);
     if (fullteam) {
-      if ((s.aku > 0 && s.mikko > 0 && s.olli > 0) == false) {
-        continue;
+      if ((s.aku > 0 && s.mikko > 0 && s.olli > 0) == true) {
+        filtered.add(d);
       }
     }
+  }
+
+  String currentDate = filtered[0].data['date'];
+  for (DocumentSnapshot d in filtered) {
+    Scores s = _parseScores(d);
+
     _serieBest(league, s);
 
     if (currentDate == d['date']) {
