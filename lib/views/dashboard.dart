@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import './addPayers.dart';
 import '../widgets/bowlbar.dart';
 import './addScore.dart';
-//import './listScores.dart';
 import './fb_list_scores.dart';
 import './listPayers.dart';
 import './league_page.dart';
+import './chartPage.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -90,6 +90,8 @@ class _DashboardState extends State<Dashboard> {
               return FB_ListScores();
             case "league":
               return LeaguePage();
+            case "charts":
+              return ChartPage();
             default:
               return PayersPage();
           }

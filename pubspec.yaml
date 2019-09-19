@@ -28,6 +28,7 @@ dependencies:
   cloud_firestore: ^0.12.3
   intl: ^0.15.8
   firebase_auth: ^0.14.0+2
+  charts_flutter: ^0.8.0
 
 dev_dependencies:
   flutter_test:
