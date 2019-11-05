@@ -25,18 +25,18 @@ class _DashboardState extends State<Dashboard> {
             crossAxisCount: 2,
             padding: EdgeInsets.all(3.0),
             children: <Widget>[
-              makeDashboard("Payers", Icons.ac_unit, "showPayers"),
-              makeDashboard("Add payer", Icons.ac_unit, "addPayer"),
-              makeDashboard("Scores", Icons.ac_unit, "scores"),
-              makeDashboard("Add scores", Icons.ac_unit, "addScore"),
-              makeDashboard("League", Icons.ac_unit, "league"),
-              makeDashboard("Charts", Icons.ac_unit, "charts"),
+              _makeDashboard("Payers", Icons.attach_money, "showPayers"),
+              _makeDashboard("Add payer", Icons.euro_symbol, "addPayer"),
+              _makeDashboard("Scores", Icons.list, "scores"),
+              _makeDashboard("Add scores", Icons.add, "addScore"),
+              _makeDashboard("League", Icons.local_bar, "league"),
+              _makeDashboard("Charts", Icons.equalizer, "charts"),
             ],
           )),
     );
   }
 
-  Card makeDashboard(String title, IconData icon, String action) {
+  Card _makeDashboard(String title, IconData icon, String action) {
     return Card(
       elevation: 1.0,
       margin: EdgeInsets.all(3.0),
